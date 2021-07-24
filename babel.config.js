@@ -6,7 +6,7 @@ module.exports = {
       {
         rootPathPrefix: '~',
         rootPathSuffix: 'src',
-      }
-    ]
-  ]
+      },
+    ],
+  ],
 };
