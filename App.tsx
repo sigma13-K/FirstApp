@@ -8,15 +8,10 @@
  * @format
  */
 
- import React from 'react';
+ import React, { Fragment } from 'react';
  import {
    SafeAreaView,
-   ScrollView,
    StatusBar,
-   StyleSheet,
-   Text,
-   useColorScheme,
-   View,
  } from 'react-native';
 
  import {
@@ -27,89 +22,71 @@
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
 
- const Section: React.FC<{
-   title: string;
- }> = ({children, title}) => {
-   const isDarkMode = useColorScheme() === 'dark';
+ import Styled from 'styled-components/native';
+ 
+ const ScrollView = Styled.ScrollView`
+  background-color: ${Colors.lighter};
+ `;
+
+ const Body = Styled.View`
+  background-color: ${Colors.white};
+ `;
+
+ const SectionContainer = Styled.View`
+  margin-top: 8px;
+  padding-horizontal: 24px;
+ `;
+
+ const SectionDescription = Styled.Text`
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 300;
+  color: ${Colors.dark};
+ `;
+
+ const HighLight = Styled.Text`
+  font-weight: 700;
+ `;
+
+ interface Props {}
+
+ const App = ({  }: Props) => {
    return (
-     <View style={styles.sectionContainer}>
-       <Text
-         style={[
-           styles.sectionTitle,
-           {
-             color: isDarkMode ? Colors.white : Colors.black,
-           },
-         ]}>
-         {title}
-       </Text>
-       <Text
-         style={[
-           styles.sectionDescription,
-           {
-             color: isDarkMode ? Colors.light : Colors.dark,
-           },
-         ]}>
-         {children}
-       </Text>
-     </View>
+     <Fragment>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Header />
+          <Body>
+            <SectionContainer>
+              <SectionDescription>Step One</SectionDescription>
+              <SectionDescription>
+                Edit <HighLight>App.js</HighLight> to change this screen and then come back to see your edits.
+              </SectionDescription>
+            </SectionContainer>
+            <SectionContainer>
+              <SectionDescription>See your Changes</SectionDescription>
+              <SectionDescription>
+                <ReloadInstructions />
+              </SectionDescription>
+            </SectionContainer>
+            <SectionContainer>
+              <SectionDescription>Debug</SectionDescription>
+              <SectionDescription>
+                <DebugInstructions />
+              </SectionDescription>
+            </SectionContainer>
+            <SectionContainer>
+              <SectionDescription>Learn More</SectionDescription>
+              <SectionDescription>
+                Read the docs to discover what to do next:
+              </SectionDescription>
+            </SectionContainer>
+            <LearnMoreLinks />
+          </Body>
+        </ScrollView>
+      </SafeAreaView>
+     </Fragment>
    );
  };
-
- const App = () => {
-   const isDarkMode = useColorScheme() === 'dark';
-
-   const backgroundStyle = {
-     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-   };
-
-   return (
-     <SafeAreaView style={backgroundStyle}>
-       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-       <ScrollView
-         contentInsetAdjustmentBehavior="automatic"
-         style={backgroundStyle}>
-         <Header />
-         <View
-           style={{
-             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-           }}>
-           <Section title="Step One">
-             Edit <Text style={styles.highlight}>App.js</Text> to change this
-             screen and then come back to see your edits.
-           </Section>
-           <Section title="See Your Changes">
-             <ReloadInstructions />
-           </Section>
-           <Section title="Debug">
-             <DebugInstructions />
-           </Section>
-           <Section title="Learn More">
-             Read the docs to discover what to do next:
-           </Section>
-           <LearnMoreLinks />
-         </View>
-       </ScrollView>
-     </SafeAreaView>
-   );
- };
-
- const styles = StyleSheet.create({
-   sectionContainer: {
-     marginTop: 32,
-     paddingHorizontal: 24,
-   },
-   sectionTitle: {
-     fontSize: 24,
-     fontWeight: '600',
-   },
-   sectionDescription: {
-     marginTop: 8,
-     fontSize: 18,
-     fontWeight: '400',
-   },
-   highlight: {
-     fontWeight: '700',
-   },
- });
-
  export default App;
