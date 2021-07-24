@@ -11,8 +11,12 @@
 - Description for ios app simulation
 ```bash
 git clone "https://github.com/sigma13-K/FirstApp.git"
+
 cd ./FirstApp/ios
+
 pod install  # for first installation (ios simulator)
+
 cd ../
+
 npm run ios
 ```
